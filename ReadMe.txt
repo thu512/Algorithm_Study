@@ -1,3 +1,3 @@
-Algorithm study repository
+문제 제출 이름 정의 양식
 
-알고리즘 스터디를 위한 GitHub 입니다
+{문제 번호}번_{이름}.java
