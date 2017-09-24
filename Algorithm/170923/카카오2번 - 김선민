@@ -1,51 +1,21 @@
-package algorism;
-
-import java.util.Random;
-import java.util.Scanner;
-
-public class kakao_02 {
-	public static void main(String[] args) {
-		 Scanner sc = new Scanner(System.in);
-	      System.out.print("정수를 입력하시오.");
-	      int n = sc.nextInt();
-	      int land[][] = new int[n][4];
-	      solution(land);
-	   }
-
-	   static int solution(int[][] land) {
-	      Random rnd = new Random();
-	      int x = 0;
-	      int b = 10;
-	      int answer = 0;
-
-	      for (int i = 0; i < land.length; i++) {
-	         if((land.length > 100000 || land.length <1 ) || land[i].length != 4) break;
-	         int y = 0;
-	         int z = 0;
-	         int a = 0;
-	         for (int j = 0; j < 4; j++) {
-	            land[i][j] = rnd.nextInt(100) + 1;
-	            if(land[i][j] > 100 || land[i][j] <1){
-	               j--;
-	            }else{
-	               if (b == j)
-	                  land[i][j] = 0;
-	               z = land[i][j];
-	               if (j != 0) {
-	                  x = (int) ((land[i][j] > land[i][j - 1]) ? land[i][j] : land[i][j - 1]);
-	                  y = (x >= y) ? x : y;
-	               }
-	               if (z == y)
-	                  a = j;
-	               System.out.printf("%4d", land[i][j]);
-	            }
-	         }
-	            b = a;
-	            System.out.println();
-	            System.out.println("================= " + y + "  " + b);
-	            answer = answer + y;
+class Solution {
+    int solution(int[][] land) {
+        int var = 0;
+	int answer = 0;
+        
+         for(int i=1; i<land.length; i++){
+	    	  for(int j=0; j<land[i].length; j++){
+	    		  int max = 0;
+	    		  for(int k=0; k<land[i].length; k++){
+	    			  if(j != k){
+	    				  var = land[i][j] + land[i-1][k];
+	    				  max = (max > var) ? max : var;		  
+	    			  }
+	    		  }
+	    		  land[i][j] = max;
+	    		  answer = (answer > max) ? answer : max;
+	    	  }
 	      }
-	      System.out.println(answer);
 	      return answer;
-	   }
-	}
+    }
+}
